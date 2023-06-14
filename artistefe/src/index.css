@@ -1,0 +1,90 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.large {
+  display: none;
+}
+
+/* body {
+} */
+.artistes {
+  background: url("./Assets/images/dami.JPEG") bottom center/cover;
+  padding: 25px;
+  height: 170px;
+  border-radius: 10px;
+  width: 359px;
+  cursor: pointer;
+}
+@media screen and (max-width: 900px) {
+  body {
+    position: relative;
+    line-height: 1.4;
+    overflow-y: scroll;
+    /* height: 100vh; */
+  }
+  .small {
+    display: none;
+  }
+  .larger {
+    display: block;
+  }
+  .screen-1 {
+    position: relative;
+    padding: 15px 15px;
+  }
+  .display-text {
+    margin: 20px 10px 0 10px;
+    font-size: 20px;
+    font-weight: 400;
+    font-family: "poppins", sans-serif;
+    color: rgba(45, 45, 45, 0.8);
+  }
+
+  .artiste-faq {
+    margin: 40px 10px 0 10px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    font-family: "rubik", sans-serif;
+    font-size: 20px;
+  }
+  .artiste-faq h2:last-child {
+    font-size: 18px;
+  }
+  .artistes-container {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    /* overflow-y: scroll; */
+  }
+  .artistes-container::-webkit-scrollbar {
+    display: none;
+  }
+  .artistes {
+    background: url("./Assets/images/dami.JPEG") bottom center/cover;
+    padding: 25px;
+    height: 170px;
+    border-radius: 10px;
+    width: 359px;
+    cursor: pointer;
+  }
+  .artistes1 {
+    background: url("./Assets/images/dami.JPEG") bottom center/cover;
+    padding: 25px;
+    height: 170px;
+    border-radius: 10px;
+    width: 359px;
+    cursor: pointer;
+    /* background-color: #974343; */
+  }
+  /* .test{
+    height: 70px;
+    width: 100px;
+    bg
+  } */
+}
