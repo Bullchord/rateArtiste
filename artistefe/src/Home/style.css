@@ -285,3 +285,108 @@ body {
 
   z-index: -1;
 }
+
+input[type="range"] {
+  box-sizing: border-box;
+  line-height: 1;
+  height: 2em;
+  background-color: transparent;
+  cursor: pointer;
+  -webkit-appearance: none;
+  width: 100%;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}
+input[type="range"]:focus {
+  outline: none;
+}
+input[type="range"]::-ms-track {
+  width: 100%;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 2em;
+  height: 2em;
+  margin-top: 0;
+  background-color: #000;
+  border-radius: 1em;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+}
+input[type="range"]::-moz-range-thumb {
+  width: 2em;
+  height: 2em;
+  margin-top: 0;
+  background-color: #16a085;
+  border-radius: 1em;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+}
+
+input[type="range"]::-ms-thumb {
+  width: 2em;
+  height: 2em;
+  margin-top: 0;
+  background-color: #16a085;
+  border-radius: 1em;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+}
+input[type="range"]:hover {
+  ::-webkit-slider-thumb {
+    border-color: rgba(255, 255, 255, 0.7);
+  }
+  ::-moz-range-thumb {
+    border-color: rgba(255, 255, 255, 0.7);
+  }
+  ::-ms-thumb {
+    border-color: rgba(255, 255, 255, 0.7);
+  }
+}
+
+input[type="range"]:active {
+  &::-webkit-slider-thumb {
+    border-color: rgba(255, 255, 255, 1);
+  }
+  &::-moz-range-thumb {
+    border-color: rgba(255, 255, 255, 1);
+  }
+  &::-ms-thumb {
+    border-color: rgba(255, 255, 255, 1);
+  }
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
+  cursor: pointer;
+  height: 1em;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+  background-color: transparent;
+}
+&::-moz-range-track {
+  width: 100%;
+  cursor: pointer;
+  height: 1em;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+  background-color: transparent;
+}
+input[type="range"]::-ms-track {
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type="range"]::-ms-fill-lower {
+}
+input[type="range"]:focus::-ms-fill-lower {
+}
+input[type="range"]::-ms-fill-upper {
+}
+input[type="range"]:focus::-ms-fill-upper {
+}
