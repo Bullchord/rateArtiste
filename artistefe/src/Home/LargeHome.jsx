@@ -94,7 +94,7 @@ const LargeHome = () => {
     }
   }
 
-  const addArtiste = async () => {
+  const addArtiste = async (name) => {
     try {
       const name = 'santos'
       await requestAccount()
@@ -125,7 +125,7 @@ const LargeHome = () => {
     }
   }
 
-  const rateArtitse = async (userId) => {
+  const rateArtiste = async (userId) => {
     if (typeof window.ethereum != 'undefined') {
       const provider = new ethers.providers.Web3Provider(window.ethereum)
       const signer = provider.getSigner()
@@ -149,20 +149,42 @@ const LargeHome = () => {
   return (
     <>
       <div className="home">
-        <input
-          type="text"
-          // onChange={handleSearchChange}
-          placeholder="Search for a name..."
-        />
-        <button onClick={connectButton}>{connect}</button>
-        <button onClick={addArtiste}>Add Artiste</button>
+        {/* <Navigation /> */}
+        <nav>
+          <input
+            type="text"
+            // onChange={handleSearchChange}
+            placeholder="Add artiste..."
+          />
+          <button onClick={connectButton}>{connect}</button>
+          <button onClick={addArtiste}>
+            <span> Add Artiste</span>
+            <svg
+              viewBox="-5 -5 110 110"
+              preserveAspectRatio="none"
+              aria-hidden="true"
+            >
+              <path d="M0,0 C0,0 100,0 100,0 C100,0 100,100 100,100 C100,100 0,100 0,100 C0,100 0,0 0,0" />
+            </svg>
+          </button>
+        </nav>
         <div className="home-container">
           {artisteNames.map((item, index) => {
             return (
-              <div key={index} className="artiste-container">
-                <div className="artiste-box">
-                  <img src={imagesData[index]} alt="" />
-                  <p>{item}</p>
+              <div key={index}>
+                <div className="figures">
+                  <figure>
+                    <img src={imagesData[index]} alt="" />
+                    <figcaption>{item}</figcaption>
+                  </figure>
+                </div>
+                <div>
+                  <button
+                    className="voting-button"
+                    onClick={() => rateArtiste(index)}
+                  >
+                    Rate
+                  </button>
                   <input
                     type="range"
                     min="0"
@@ -170,13 +192,23 @@ const LargeHome = () => {
                     value={artisteVote[index]}
                     readOnly
                   />
-                  <button onClick={() => rateArtitse(index)}>Vote</button>
                 </div>
               </div>
             )
           })}
         </div>
+        {/* <div className="figures">
+          <figure>
+            <img src="https://picsum.photos/id/287/250/300" alt="Mountains" />
+            <figcaption>The Day</figcaption>
+          </figure>
+          <figure>
+            <img src="https://picsum.photos/id/475/250/300" alt="Mountains" />
+            <figcaption>The Night</figcaption>
+          </figure>
+        </div> */}
       </div>
+      {/* style="--c:#fff5" */}
       {/* <input
         type="text"
         onChange={handleSearchChange}
@@ -210,7 +242,7 @@ const LargeHome = () => {
                   value={artisteVote[index]}
                   readOnly
                 />
-                <button onClick={() => rateArtitse(index)}>Vote</button>
+                <button onClick={() => rateArtiste(index)}>Vote</button>
               </div>
             </motion.div>
           ))} */}
@@ -219,7 +251,7 @@ const LargeHome = () => {
       {/* <button onClick={getArtisteVotes}>Get Artiste Votes</button>
       <button onClick={getArtiste}> Get Artiste Name</button>
       <button onClick={addArtiste}> Add Artiste</button>
-      <button onClick={rateArtitse}>Vote</button>
+      <button onClick={rateArtiste}>Vote</button>
         <button onClick={connectButton}>{connect}</button>
 
       */}

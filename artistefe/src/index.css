@@ -19,6 +19,9 @@
   width: 359px;
   cursor: pointer;
 }
+body {
+  background: #000;
+}
 @media screen and (max-width: 900px) {
   body {
     position: relative;
