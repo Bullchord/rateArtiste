@@ -3,7 +3,7 @@ import { motion, useScroll } from 'framer-motion'
 import './style.css'
 import { ethers } from 'ethers'
 import { abi, contractAddress, imagesData } from '../constants.js'
-
+import Socials from './Socials'
 const artsData = [
   { name: 'SOB', id: 1, votes: 0 },
   { name: 'Drake', id: 2, votes: 0 },
@@ -156,9 +156,8 @@ const LargeHome = () => {
             // onChange={handleSearchChange}
             placeholder="Add artiste..."
           />
-          <button onClick={connectButton}>{connect}</button>
-          <button onClick={addArtiste}>
-            <span> Add Artiste</span>
+          <button onClick={connectButton}>
+            <span>{connect}</span>
             <svg
               viewBox="-5 -5 110 110"
               preserveAspectRatio="none"
@@ -167,6 +166,8 @@ const LargeHome = () => {
               <path d="M0,0 C0,0 100,0 100,0 C100,0 100,100 100,100 C100,100 0,100 0,100 C0,100 0,0 0,0" />
             </svg>
           </button>
+          <button onClick={addArtiste}> Add Artiste</button>
+          <Socials />
         </nav>
         <div className="home-container">
           {artisteNames.map((item, index) => {
@@ -178,7 +179,7 @@ const LargeHome = () => {
                     <figcaption>{item}</figcaption>
                   </figure>
                 </div>
-                <div>
+                <div className="figures-button">
                   <button
                     className="voting-button"
                     onClick={() => rateArtiste(index)}
