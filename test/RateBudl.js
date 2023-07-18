@@ -1,12 +1,12 @@
 const { expect, assert, describe } = require("chai");
 const { ethers } = require("hardhat");
 
-describe("RateArtiste", function () {
-  let rateArtisteFactory, rateArtiste;
+describe("RateBudl", function () {
+  let rateBudlFactory, rateBudl;
 
   beforeEach(async function () {
-    rateArtisteFactory = await ethers.getContractFactory("RateArtiste");
-    rateArtiste = await rateArtisteFactory.deploy();
+    rateBudlFactory = await ethers.getContractFactory("RateBudl");
+    rateBudl = await rateArtisteFactory.deploy();
   });
   it("Should add an artiste", async function () {
     const newArtiste = "Mike";

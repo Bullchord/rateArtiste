@@ -1,10 +1,4 @@
-import dami from "./Assets/images/dami.JPEG";
-import Sivante from "./Assets/images/Sivante.jpeg";
-import stickup from "./Assets/images/stickup.png";
-import uti from "./Assets/images/uti.png";
-
-export const imagesData = [dami, Sivante, stickup, uti];
-export const contractAddress = "0xf3Aa531C896c79BC2F5746d67F1bC428f5FA28D0";
+export const contractAddress = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
 export const abi = [
   {
     inputs: [],
@@ -17,17 +11,23 @@ export const abi = [
       {
         indexed: false,
         internalType: "uint256",
-        name: "artisteID",
+        name: "budlId",
         type: "uint256",
       },
       {
         indexed: false,
         internalType: "string",
-        name: "artisteName",
+        name: "weblink",
+        type: "string",
+      },
+      {
+        indexed: false,
+        internalType: "string",
+        name: "budlName",
         type: "string",
       },
     ],
-    name: "ArtisteAdded",
+    name: "BudlAdded",
     type: "event",
   },
   {
@@ -42,7 +42,13 @@ export const abi = [
       {
         indexed: false,
         internalType: "string",
-        name: "artisteName",
+        name: "weblink",
+        type: "string",
+      },
+      {
+        indexed: false,
+        internalType: "string",
+        name: "budlName",
         type: "string",
       },
       {
@@ -62,8 +68,13 @@ export const abi = [
         name: "_name",
         type: "string",
       },
+      {
+        internalType: "string",
+        name: "_weblink",
+        type: "string",
+      },
     ],
-    name: "addArtiste",
+    name: "addBudl",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -76,7 +87,7 @@ export const abi = [
         type: "uint256",
       },
     ],
-    name: "artiste",
+    name: "budl",
     outputs: [
       {
         internalType: "uint256",
@@ -86,6 +97,11 @@ export const abi = [
       {
         internalType: "string",
         name: "name",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "weblink",
         type: "string",
       },
       {
@@ -99,7 +115,7 @@ export const abi = [
   },
   {
     inputs: [],
-    name: "artisteCount",
+    name: "budlCount",
     outputs: [
       {
         internalType: "uint256",
@@ -114,11 +130,11 @@ export const abi = [
     inputs: [
       {
         internalType: "uint256",
-        name: "_artisteId",
+        name: "_budlId",
         type: "uint256",
       },
     ],
-    name: "getArtiste",
+    name: "getBudl",
     outputs: [
       {
         internalType: "string",
@@ -133,15 +149,63 @@ export const abi = [
     inputs: [
       {
         internalType: "uint256",
-        name: "_artisteId",
+        name: "_budlId",
         type: "uint256",
       },
     ],
-    name: "getArtisteVotes",
+    name: "getBudlLink",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_budlId",
+        type: "uint256",
+      },
+    ],
+    name: "getBudlVotes",
     outputs: [
       {
         internalType: "uint256",
         name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_budlId",
+        type: "uint256",
+      },
+    ],
+    name: "getBudls",
+    outputs: [
+      {
+        internalType: "string",
+        name: "name",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "weblink",
+        type: "string",
+      },
+      {
+        internalType: "uint256",
+        name: "vote",
         type: "uint256",
       },
     ],
@@ -165,11 +229,11 @@ export const abi = [
     inputs: [
       {
         internalType: "uint256",
-        name: "_artisteId",
+        name: "_budlId",
         type: "uint256",
       },
     ],
-    name: "rateArtiste",
+    name: "rateBudl",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",

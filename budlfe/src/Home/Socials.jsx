@@ -1,6 +1,5 @@
 import React from 'react'
 import './socials.css'
-import telegram from '../Assets/images/telegram.svg'
 
 const Socials = () => {
   return (
