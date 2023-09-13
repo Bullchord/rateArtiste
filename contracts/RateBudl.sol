@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
+import "./IERC20.sol";
 
 contract RateBudl {
     //Defining a struct for each budl
@@ -9,19 +10,23 @@ contract RateBudl {
         string weblink;
         uint votes;
     }
-    uint256 public immutable i_votingFee = 0.0083 ether;
+    // uint256 public immutable i_votingFee = 0.0083 ether;
 
     address public owner;
     //mapping each candidate for easy ref;
+    address[] public voters;
+    
     mapping(uint => Budl) public budl;
     //keeping track of the budlCount
     uint public budlCount;
     //leeping track of people who has voted
     mapping(address => bool) hasRated;
 
+    address public erc20TokenAddress;
+    IERC20 private erc20Token;
+    uint256 public minimumTokenBalance = 20 ether;
     //Event to notify when budl has been added
     event BudlAdded(uint256 budlId, string weblink, string budlName);
-
     // event to notify when voted has been casted
     event VoteCasted(
         uint candidateId,
@@ -30,8 +35,10 @@ contract RateBudl {
         uint votes
     );
 
-    constructor() {
+    constructor(address _erc20TokenAddress) {
         owner = msg.sender;
+        erc20TokenAddress = _erc20TokenAddress;
+        erc20Token = IERC20(_erc20TokenAddress);
     }
 
     modifier onlyOwner() {
@@ -56,16 +63,22 @@ contract RateBudl {
     }
 
     //function to vote/rate an budl
-    function rateBudl(uint _budlId) public payable {
+    function rateBudl(uint _budlId) public {
+        require(
+            erc20Token.balanceOf(msg.sender) >= minimumTokenBalance,
+            "Insufficient token balance to vote"
+        );
         //making sure the voter hasnt already voted
         require(!hasRated[msg.sender], "You have already voted!");
         // making sure the candidate exists
         require(_budlId > 0 && _budlId <= budlCount, "Invalid buldl!");
-        require(msg.value >= i_votingFee, "Insufficient voting fee");
+
+        // require(msg.value >= i_votingFee, "Insufficient voting fee");
         //incrementing the budl votes count
         budl[_budlId].votes++;
         //marking the voter as voted
         hasRated[msg.sender] = true;
+        voters.push(msg.sender);
 
         //emit voted
         emit VoteCasted(
@@ -75,14 +88,15 @@ contract RateBudl {
             budl[_budlId].votes
         );
     }
-    function withdraw() public onlyOwner {
-        uint256 balance = address(this).balance;
-        require(balance>0, "not enough funs");
 
-        balance = 0;
-        (bool success,) = owner.call{value :balance}("");
-        require(success, "withdrawal failed");
-    }
+    // function withdraw() public onlyOwner {
+    //     uint256 balance = address(this).balance;
+    //     require(balance>0, "not enough funs");
+
+    //     balance = 0;
+    //     (bool success,) = owner.call{value :balance}("");
+    //     require(success, "withdrawal failed");
+    // }
 
     //function to get the budl votes
     function getBudlVotes(uint _budlId) public view returns (uint256) {
