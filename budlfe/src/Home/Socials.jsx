@@ -33,7 +33,7 @@ const Socials = () => {
             </li>
             <li style={{ '--index': 2 }}>
               <a
-                href="https://twitter.com/jh3yy"
+                href="https://twitter.com/decentrabuilds"
                 target="_blank"
                 rel="noreferrer noopener"
               >

@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 import "./IERC20.sol";
 
 contract RateBudl {
-    //Defining a struct for each budl
+    //Struct that holds all budl infos
     struct Budl {
         uint id;
         string name;
@@ -24,10 +24,23 @@ contract RateBudl {
 
     address public erc20TokenAddress;
     IERC20 private erc20Token;
-    uint256 public minimumTokenBalance = 20 ether;
-    //Event to notify when budl has been added
+    uint256 public minimumTokenBalance = 20000000000000000000 wei;
+
+    /**
+     * @dev Emitted when a new Budl is added.
+     * @param budlId The ID of the added Budl.
+     * @param weblink The weblink of the added Budl.
+     * @param budlName The name of the added Budl.
+     */
     event BudlAdded(uint256 budlId, string weblink, string budlName);
-    // event to notify when voted has been casted
+
+      /**
+     * @dev Emitted when a vote is casted for a Budl.
+     * @param candidateId The ID of the Budl being voted on.
+     * @param weblink The weblink of the Budl.
+     * @param budlName The name of the Budl.
+     * @param votes The updated number of votes for the Budl.
+     */
     event VoteCasted(
         uint candidateId,
         string weblink,
@@ -35,12 +48,20 @@ contract RateBudl {
         uint votes
     );
 
+     /**
+     * @dev Constructor to initialize the contract with the address of the ERC20 token.
+     * @param _erc20TokenAddress The address of the ERC20 token contract.
+     */
     constructor(address _erc20TokenAddress) {
         owner = msg.sender;
         erc20TokenAddress = _erc20TokenAddress;
         erc20Token = IERC20(_erc20TokenAddress);
     }
 
+ /**
+    @notice This allows only the owner to perform certain function
+    @dev allows only the contract owner to pertform functions   
+   */ 
     modifier onlyOwner() {
         require(
             msg.sender == owner,
@@ -49,7 +70,12 @@ contract RateBudl {
         _;
     }
 
-    //adding a new budl
+    /**
+    @notice This allows the project owner to add more budls 
+    @dev adds more budl
+    @param _name accepts the name of a buldl project.
+    @param _weblink accepts the link to the buldl project.
+   */ 
     function addBudl(
         string memory _name,
         string memory _weblink
@@ -62,8 +88,13 @@ contract RateBudl {
         emit BudlAdded(budlCount, _name, _weblink);
     }
 
-    //function to vote/rate an budl
+    /**
+    @notice This allows a user to rate/vote for a particular project
+    @dev checks the user holds some token before it can vote 
+    @param _budlId accepts the Id of a buldl project.
+   */ 
     function rateBudl(uint _budlId) public {
+        //this ensure the user holds some token before they can vote or rate any BUDL
         require(
             erc20Token.balanceOf(msg.sender) >= minimumTokenBalance,
             "Insufficient token balance to vote"
@@ -89,9 +120,14 @@ contract RateBudl {
         );
     }
 
+    /**
+      @notice This allows the contract owner to wirthdraw the acxcumulated voting fee
+      @dev implement the withdrawal function if you added a voting fee : OPTIONAL
+   */ 
+
     // function withdraw() public onlyOwner {
     //     uint256 balance = address(this).balance;
-    //     require(balance>0, "not enough funs");
+    //     require(balance>0, "not enough funds");
 
     //     balance = 0;
     //     (bool success,) = owner.call{value :balance}("");
